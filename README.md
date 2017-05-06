@@ -1,2 +1,2 @@
 # ChatFdApp
-Chat Federation
+Chat Federation - Basic
