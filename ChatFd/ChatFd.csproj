@@ -80,15 +80,14 @@
     <ApplicationIcon>Resources\ChatFd.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RACoN, Version=0.0.1.291, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Implementation\Federation\Output\bin\Release\RACoN.dll</HintPath>
+    <Reference Include="Racon">
+      <HintPath>..\..\..\Implementation\Federation\Output\bin\Release\Racon.dll</HintPath>
     </Reference>
     <Reference Include="Racon.RtiLayer">
-      <HintPath>..\..\..\..\Implementation\Federation\Output\bin\Release\Racon.RtiLayer.dll</HintPath>
+      <HintPath>..\..\..\Implementation\Federation\Output\bin\Release\Racon.RtiLayer.dll</HintPath>
     </Reference>
-    <Reference Include="RACoN.RtiLayer.Native">
-      <HintPath>..\..\..\..\Implementation\Federation\Output\bin\Release\RACoN.RtiLayer.Native.dll</HintPath>
+    <Reference Include="Racon.RtiLayer.Native">
+      <HintPath>..\..\..\Implementation\Federation\Output\bin\Release\Racon.RtiLayer.Native.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
