@@ -29,15 +29,15 @@ namespace Chat_DDM.Som
     public CUserOC() : base()
     {
       // Initialize Class Properties
-      this.ClassName = "ObjectRoot.User";
-      this.ClassPS = Racon.RtiLayer.PSKind.PublishSubscribe;
+      this.Name = "ObjectRoot.User";
+      this.ClassPS = Racon.PSKind.PublishSubscribe;
       
       // Create Attributes
       // NickName
-      NickName = new Racon.RtiLayer.CHlaObjectAttribute("NickName", Racon.RtiLayer.PSKind.PublishSubscribe);
+      NickName = new Racon.RtiLayer.HlaAttribute("NickName", Racon.PSKind.PublishSubscribe);
       this.Attributes.Add(NickName);
       // Status
-      Status = new Racon.RtiLayer.CHlaObjectAttribute("Status", Racon.RtiLayer.PSKind.PublishSubscribe);
+      Status = new Racon.RtiLayer.HlaAttribute("Status", Racon.PSKind.PublishSubscribe);
       this.Attributes.Add(Status);
     }
     #endregion //Constructor

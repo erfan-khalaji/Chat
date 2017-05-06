@@ -19,7 +19,7 @@ using Chat_DDM.Som;
 #endregion //Using Directives
 namespace Chat_DDM
 {
-  public partial class CChatFd : Racon.Federation.CGenericFederate
+  public partial class CChatFd : Racon.CGenericFederate
   {
     #region Manually Added Code
     private Object thisLock = new Object();
@@ -57,7 +57,7 @@ namespace Chat_DDM
       // Send interaction
       return (this.SendInteraction(interaction));
     }
-    public bool SendMessage(String txt, CHlaRegion region)
+    public bool SendMessage(String txt, HlaRegion region)
     {
       Racon.RtiLayer.HlaInteraction interaction = new Racon.RtiLayer.HlaInteraction(this.Som.ChatIC, "Chat");
       // Add Values
@@ -82,7 +82,7 @@ namespace Chat_DDM
       return (this.UpdateAttributeValues(user));
     }
     // Subscribe
-    public void Subscribe(CChatIC ic, Racon.RtiLayer.CHlaRegion region)
+    public void Subscribe(CChatIC ic, Racon.RtiLayer.HlaRegion region)
     {
       this.SubscribeInteractionClass(ic, region);
     }
@@ -135,7 +135,7 @@ namespace Chat_DDM
 
         this.simManager.Users.Add(nUser);
         // Request update for this object
-        this.RequestAttributeUpdate(this.Som.UserOC);
+        RequestAttributeValueUpdate(this.Som.UserOC);
       }
     }
     // An Object is Removed
@@ -192,7 +192,7 @@ namespace Chat_DDM
       foreach (CUser user in this.simManager.Users)
       {
         // Find the Object
-        if (data.ObjectHandle == user.ObjectHandle)
+        if (data.ObjectInstance.Handle == user.Handle)
         {
           // First check wheather the attr is updated or not. Result returns 0/null if the updated attribute set does not contain the attr and its value 
           if (data.IsValueUpdated(Som.UserOC.NickName))
@@ -210,7 +210,7 @@ namespace Chat_DDM
 
       // User code
       // Which interaction class?
-      if (data.InteractionClassHandle == this.Som.ChatIC.Handle)
+      if (data.Interaction.ClassHandle == this.Som.ChatIC.Handle)
       {
         String sentBy = "";
         String msg = "";

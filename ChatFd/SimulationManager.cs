@@ -25,7 +25,7 @@ namespace Chat_DDM
     #region Declarations
     // HLA Part (Communication Layer)
     // Federation Execution
-    public Racon.Federation.CFederationExecution federation;
+    public Racon.CFederationExecution federation;
     // Application-specific Federate
     public CChatFd federate;
     // User Code
@@ -38,7 +38,7 @@ namespace Chat_DDM
     public CSimulationManager(Form1 _form)
     {
       // Initialize the federation execution
-      federation = new Racon.Federation.CFederationExecution();
+      federation = new Racon.CFederationExecution();
       federation.Name = "TestFederation";
       federation.FDD = @".\SimGe_Chat_DDM.fed";
       // Initialize the application-specific federate

@@ -27,7 +27,7 @@ namespace Chat_DDM
       
       // Getting the information/debugging messages
       this.simulation.federate.StatusMessageChanged += new EventHandler(CChatFd_StatusMessageChanged);
-      this.simulation.federate.InfoLevel = Racon.Federation.DebugLevel.VERBOSE;
+      this.simulation.federate.LogLevel = Racon.LogLevel.ALL;
     }
 
     // Racon Information recevied
@@ -45,7 +45,7 @@ namespace Chat_DDM
         simulation.federate.NickName = _nDlg.NickName;
         simulation.federation.FederateName = simulation.federate.NickName;
         this.simulation.Users[0].NickName = simulation.federate.NickName;
-        this.simulation.Users[0].Status = StatusTypes.chatte;
+        this.simulation.Users[0].Status = StatusTypes.INCHAT;
         //this.simulation.Users[0].ObjectInstanceName = _nDlg.UserOC.NickName; // RTI performance penalty due to the name reservation
 
         // Initialize Federation
@@ -64,7 +64,7 @@ namespace Chat_DDM
 
           //****************
           // Subscribe with a region, first construct a attributes list
-          List<Racon.RtiLayer.CHlaObjectAttribute> Attributes = new List<Racon.RtiLayer.CHlaObjectAttribute>();
+          List<Racon.RtiLayer.HlaAttribute > Attributes = new List<Racon.RtiLayer.HlaAttribute>();
           Attributes.Add(this.simulation.federate.Som.UserOC.NickName);
           this.simulation.federate.subscribeObjectClassAttributesWithRegion(this.simulation.federate.Som.UserOC,  Attributes, this.simulation.federate.Som.ChatWorldSpace.Room1Region);
 
@@ -92,7 +92,7 @@ namespace Chat_DDM
       //bool result = this.simulation.federate.FinalizeFederation(this.simulation.federation, Racon.Federation.ResignAction.DELETE_OBJECTS_THEN_DIVEST);
       bool result = this.simulation.federate.FinalizeFederation(this.simulation.federation);
       // Reset Local data
-      this.simulation.Users[0].Status = StatusTypes.hazır;
+      this.simulation.Users[0].Status = StatusTypes.READY;
       // GUI Setup for enter
       this.button_exit.Enabled = false;
       this.button_send.Enabled = false;
@@ -123,7 +123,7 @@ namespace Chat_DDM
     // DoSimulation
     public void DoSimulation()
     {
-      if (this.simulation.federate.FederateState == Racon.Federation.FederateStates.JOINED)
+      if (this.simulation.federate.FederateState == Racon.FederateStates.JOINED)
       {
         this.simulation.federate.Run();
       }

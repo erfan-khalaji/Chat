@@ -30,8 +30,8 @@ namespace Chat_DDM.Som
     public CChatIC() : base()
     {
       // Initialize Class Properties
-      this.ClassName = "InteractionRoot.Chat";
-      this.ClassPS = Racon.RtiLayer.PSKind.PublishSubscribe;
+      this.Name = "InteractionRoot.Chat";
+      this.ClassPS = Racon.PSKind.PublishSubscribe;
       
       // Create Parameters
       // Sender

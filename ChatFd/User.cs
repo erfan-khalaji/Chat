@@ -12,7 +12,7 @@ using System.Runtime.InteropServices; // StructLayout
 
 namespace Chat_DDM
 {
-  public enum StatusTypes { hazır, chatte };
+  public enum StatusTypes { READY, INCHAT };
 
   public class CUser : Racon.RtiLayer.HlaObject
   {
@@ -36,14 +36,14 @@ namespace Chat_DDM
     {
       // Local Data
       NickName = "Guest";
-      Status = StatusTypes.hazır;
+      Status = StatusTypes.READY;
     }
     public CUser(Racon.RtiLayer.HlaObjectClass _type, Racon.RtiLayer.HlaObjectEventArgs _obj)
       : base(_type, _obj)
     {
       // Local Data
       NickName = "Guest";
-      Status = StatusTypes.hazır;
+      Status = StatusTypes.READY;
     }
 
   }

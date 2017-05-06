@@ -17,7 +17,7 @@ using System;
 using Racon;
 namespace Chat_DDM
 {
-  public partial class CChatFd : Racon.Federation.CGenericFederate
+  public partial class CChatFd : Racon.CGenericFederate
   {
     #region Declarations
     public Chat_DDM.Som.FederateSom Som;

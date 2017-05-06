@@ -23,14 +23,14 @@ using Racon;
 
 namespace Chat_DDM.Som
 {
-  public class COda2Region : Racon.RtiLayer.CHlaRegion
+  public class COda2Region : Racon.RtiLayer.HlaRegion
   {
     #region Declarations
     #endregion //Declarations
     
     #region Constructor
     public COda2Region()
-      : base()
+      : base("oda2")
     {
       this.Name = "oda2";
     }
