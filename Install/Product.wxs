@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Name="ChatFdApp" Id="{0BBBEBC8-6218-4D28-807F-65B9BA23F5F4}"
+           Manufacturer="oToT"
+           Language="1033" Version="0.0.2.3" UpgradeCode="{EEACA931-BED4-4B69-B040-7AC448E822C4}">
+    <Package Id='*'
+             Keywords='Modelling and Simulation'
+             Description="ChatFdApp Installer"
+             Comments='ChatFdApp is a registered trademark of oToT.'
+             Manufacturer='oToT'
+             InstallerVersion="200" Compressed="yes" InstallScope="perMachine"
+             />
+    <Property Id="ARPPRODUCTICON" Value="ChatFdApp.ico" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of ChatFdApp is already installed." />
+    <MediaTemplate />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <!--Program Files Folder-->
+      <Directory Id="ProgramFilesFolder" Name='PFiles'>
+        <Directory Id='APPLICATIONFOLDER' Name='oToT'>
+          <Directory Id="INSTALLDIR" Name="ChatFdApp">
+            <!--Executables-->
+            <Component Id='MainExecutable' Guid='{B8755F3D-2D6A-42A5-B471-3C684C02CA92}'>
+              <File Id='ChatFdEXE' Name='Chat.exe' DiskId='1' Source='../Output/Release/Chat.exe' KeyPath='yes'>
+                <Shortcut Id="StartMenuSimGeShortCut"
+                          Name="ChatFdApp 0.0.2" Icon="Chat.ico"
+                          Directory="ProgramMenuDir" WorkingDirectory='INSTALLDIR' IconIndex="0" Advertise="yes" />
+              </File>
+            </Component>
+            <!--RACoN Libs-->
+            <Component Id='RaconLib' Guid='{2a41d285-9c1a-4480-ac02-6b31356b6c49}'>
+              <File Id='RACoN' Name='Racon.dll' DiskId='1' Source='../Output/Release/Racon.dll' KeyPath='yes' />
+            </Component>
+            <Component Id='RaconRtiLayerLib' Guid='{bf7b1e1d-55eb-4581-8009-5e2757f9c8c6}'>
+              <File Id='Rep1' Name='Racon.RtiLayer.dll' DiskId='1' Source='../Output/Release/Racon.RtiLayer.dll' KeyPath='yes' />
+            </Component>
+            <Component Id='RaconRtiLayerNativeLib' Guid='{95887C1F-A11B-47CA-9BBF-67DB0B3417E3}'>
+              <File Id='Rep2' Name='Racon.RtiLayer.Native.dll' DiskId='1' Source='../Output/Release/Racon.RtiLayer.Native.dll' KeyPath='yes' />
+            </Component>
+            <!--HLA1516e Libs-->
+            <Component Id='librti1516e' Guid='{4FFBC430-87B9-4438-99C8-FC7F7B0AEAFC}'>
+              <File Id='librti1516edll' Name='librti1516e.dll' DiskId='1' Source='../Output/Resources/librti1516e.dll' KeyPath='yes' />
+            </Component>
+            <Component Id='libfedtime1516e' Guid='{7240457E-8854-4A95-945E-692D5523AADB}'>
+              <File Id='libfedtime1516edll' Name='libfedtime1516e.dll' DiskId='1' Source='../Output/Resources/libfedtime1516e.dll' KeyPath='yes' />
+            </Component>
+            <Component Id='OpenRTI' Guid='{7B080CBB-60DA-4D29-A765-0CDDF004F440}'>
+              <File Id='OpenRTIdll' Name='OpenRTI.dll' DiskId='1' Source='../Output/Resources/OpenRTI.dll' KeyPath='yes' />
+            </Component>
+            <!--HLA13 Libs-->
+            <Component Id='libRTING' Guid='{0EB13B68-6B5F-4834-9F51-052028F2E6FD}'>
+              <File Id='libRTINGdll' Name='libRTI-NG.dll' DiskId='1' Source='../Output/Resources/libRTI-NG.dll' KeyPath='yes' />
+            </Component>
+            <Component Id='libFedTime' Guid='{2C69B70F-F484-47FF-B644-C739C19994D0}'>
+              <File Id='libFedTimedll' Name='libFedTime.dll' DiskId='1' Source='../Output/Resources/libFedTime.dll' KeyPath='yes' />
+            </Component>
+            <!--Runtime Docs-->
+            <Component Id='FedDoc' Guid='{1AFA5C23-4D7E-457C-838A-4CA1802CF502}'>
+              <File Id='FedDocf' Name='SimGe_Chat.fed' DiskId='1' Source='../Output/Release/SimGe_Chat.fed' KeyPath='yes' />
+            </Component>
+            <Component Id='FddDoc' Guid='{E3C1680D-6CFB-413B-88F7-D79A3386F4C1}'>
+              <File Id='FddDocf' Name='SimGe_Chat.xml' DiskId='1' Source='../Output/Release/SimGe_Chat.xml' KeyPath='yes' />
+            </Component>
+            <Component Id='RidDoc' Guid='{08F53521-6143-4197-B786-FFE454D992A0}'>
+              <File Id='RidDocf' Name='RTI.rid' DiskId='1' Source='../Output/Release/RTI.rid' KeyPath='yes' />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <!--Program Menu-->
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="ChatFdApp">
+          <Component Id="ProgramMenuDir" Guid="{C6F94B0F-2F04-4C3E-8BA6-E35953A06B5E}">
+            <Shortcut Id="UninstallProduct"
+                      Name="Uninstall ChatFdApp" Description="Uninstalls ChatFdApp"
+                      Target="[SystemFolder]msiexec.exe"
+                      Arguments="/x [ProductCode]"
+                          />
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id='Complete' Title="ChatFdApp Setup" Description='The complete package.' Display='expand' Level='1' ConfigurableDirectory='INSTALLDIR'>
+      <ComponentRef Id='MainExecutable' />
+      <ComponentRef Id='RaconLib' />
+      <ComponentRef Id='RaconRtiLayerLib' />
+      <ComponentRef Id='RaconRtiLayerNativeLib' />
+      <ComponentRef Id='librti1516e' />
+      <ComponentRef Id='libfedtime1516e' />
+      <ComponentRef Id='OpenRTI' />
+      <ComponentRef Id='libRTING' />
+      <ComponentRef Id='libFedTime' />
+      <ComponentRef Id='FedDoc' />
+      <ComponentRef Id='FddDoc' />
+      <ComponentRef Id='RidDoc' />
+      <ComponentRef Id='ProgramMenuDir' />
+    </Feature>
+    <!--Icons-->
+    <Icon Id="Chat.ico" SourceFile="../Output/Resources/Chat.ico" />
+    <UI>
+      <UIRef Id="WixUI_Advanced" />
+      <Publish Dialog="ExitDialog"
+          Control="Finish"
+          Event="DoAction"
+          Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch ChatFdApp" />
+    <Property Id="ApplicationFolderName" Value="oToT" />
+    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+    <WixVariable Id="WixUISupportPerUser" Value="0" />
+    <WixVariable Id="WixUILicenseRtf" Value="../Output/Resources/License.rtf" />
+    <!-- Include the custom action -->
+    <Property Id="WixShellExecTarget" Value="[#ChatFdEXE]" />
+    <CustomAction Id="LaunchApplication"
+        BinaryKey="WixCA"
+        DllEntry="WixShellExec"
+        Impersonate="yes"
+    />
+
+    <PropertyRef Id="NETFRAMEWORK40CLIENT"/>
+    <Condition Message='This setup requires the .NET Framework 4.0 Client Profile installed.'>
+      <![CDATA[Installed OR NETFRAMEWORK40CLIENT]]>
+    </Condition>
+  </Product>
+</Wix>
