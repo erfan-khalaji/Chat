@@ -12,6 +12,7 @@ using System.Runtime.InteropServices; // StructLayout
 
 namespace Chat
 {
+  [Serializable]
   public enum StatusTypes { READY, INCHAT };
 
   public class CUser : HlaObject, INotifyPropertyChanged
@@ -52,6 +53,7 @@ namespace Chat
       // Local Data
       NickName = "Guest";
       Status = StatusTypes.READY;
+      Type = _obj.Type;
     }
 
     // To refresh display elements

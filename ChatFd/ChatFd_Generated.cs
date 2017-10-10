@@ -157,16 +157,6 @@ namespace Chat
     //  throw new NotImplementedException("FdAmb_ObjectDiscoveredHandler");
     //  #endregion //User Code
     //}
-    // An Object is Removed
-    //public override void FdAmb_ObjectRemovedHandler(object sender, Racon.RtiLayer.HlaObjectEventArgs data)
-    //{
-    //  // Call the base class handler
-    //  base.FdAmb_ObjectRemovedHandler(sender, data);
-
-    //  #region User Code
-    //  throw new NotImplementedException("FdAmb_ObjectRemovedHandler");
-    //  #endregion //User Code
-    //}
     // Attribute Value Update is Requested
     //public override void FdAmb_AttributeValueUpdateRequestedHandler(object sender, Racon.RtiLayer.HlaObjectEventArgs data)
     //{

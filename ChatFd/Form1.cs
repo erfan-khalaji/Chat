@@ -88,12 +88,11 @@ namespace Chat
     // Exit Federation
     private void button_exit_Click(object sender, EventArgs e)
     {
-      // Delete Local objects
-      simulation.Users[0].Tag = "I am leaving"; // not mandatory
-      simulation.federate.DeleteObjectInstance(simulation.Users[0], 1.5); // When not registered, it raises an exception ObjectNotKnown
+      // Delete Local object
+      simulation.federate.DeleteObjectInstance(simulation.Users[0], Tags.DeleteRemoveTag); 
+      // When not registered, it raises an exception ObjectNotKnown
       // Leave federation
-      //bool result = simulation.federate.FinalizeFederation(simulation.federation, Racon.Federation.ResignAction.DELETE_OBJECTS_THEN_DIVEST);
-      bool result = simulation.federate.FinalizeFederation(simulation.federate.FederationExecution);
+      bool result = simulation.federate.FinalizeFederation(simulation.federate.FederationExecution, Racon.ResignAction.NO_ACTION);
       // Reset Local data
       simulation.Users[0].Status = StatusTypes.READY;
       simulation.Users.Clear();
@@ -102,7 +101,9 @@ namespace Chat
     // Send message
     private void button_send_Click(object sender, EventArgs e)
     {
-
+      //// To UTF-8
+      //byte[] bytes = Encoding.Default.GetBytes(textBox_send.Text);
+      //string message = Encoding.UTF8.GetString(bytes);
       string message = textBox_send.Text;
       // Send Chat Interaction
       if (simulation.federate.SendMessage(message))

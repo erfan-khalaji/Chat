@@ -9,7 +9,7 @@
 
 #region Using Directives
 using System;
-using System.Collections.Generic;
+using System.Text;
 using System.Linq;
 using Racon.RtiLayer;
 #endregion //Using Directives
@@ -64,7 +64,7 @@ namespace Chat
       //interaction.AddParameter(Som.ChatIC.Sender);
 
       // Send interaction
-      return (SendInteraction(interaction));
+      return (SendInteraction(interaction, Tags.SendReceive));
     }
     // Send Chat ChatIC.Message with Timestamp
     public Racon.RtiLayer.MessageRetraction SendMessage(string txt, double ts)
@@ -84,32 +84,32 @@ namespace Chat
     {
       // Add Values
       user.AddAttributeValue(Som.UserOC.NickName, user.NickName);
-      return (UpdateAttributeValues(user));
+      return (UpdateAttributeValues(user, Tags.UpdateReflectTag));
     }
     // UpdateStatus
     public bool UpdateStatus(CUser user)
     {
       user.AddAttributeValue(Som.UserOC.Status, (uint)user.Status);
-      // Update attribute using a logical timestamp
-      MessageRetraction handle = UpdateAttributeValues(user, 3.14);
-      return true;
+      return (UpdateAttributeValues(user, Tags.UpdateReflectTag));
+      //// Update attribute using a logical timestamp
+      //MessageRetraction handle = UpdateAttributeValues(user, 3.14);
+      //return true;
     }
     // Pull Ownership
     public void PullOwnershipUnOwnedAttributes(CUser user)
     {
       // Create attribute set that we want to take ownership
-      Racon.RtiLayer.RaconAttributeSet set = new Racon.RtiLayer.RaconAttributeSet();
+      RaconAttributeSet set = new Racon.RtiLayer.RaconAttributeSet();
       set.AddAttribute(Som.UserOC.NickName);
       set.AddAttribute(Som.UserOC.PrivilegeToDelete);
       //this.AttributeOwnershipAcquisitionIfAvailable(user, set);
       // Pull All
-      this.AttributeOwnershipAcquisition(user, "");
+      AttributeOwnershipAcquisition(user, "");
       // Pull
       //this.AttributeOwnershipAcquisition(user, set);
       // Cancel
       //this.CancelAttributeOwnershipAcquisition(user, set);
     }
-
 
     // RtiAmb Events
     public override void RtiAmb_FederationExecutionCreated(object sender, Racon.RtiLayer.RaconEventArgs e)
@@ -157,11 +157,11 @@ namespace Chat
       {
         // Create and add a new user to the list
         CUser nUser = new CUser(data.ObjectInstance);
-        //nUser.Type = Som.UserOC;
+        nUser.Type = Som.UserOC;
         simManager.Users.Add(nUser);
 
         // Request Update Values
-        RequestAttributeValueUpdate(nUser);// Request update values of all attributes for this specific object
+        RequestAttributeValueUpdate(nUser, string.Empty);// Request update values of all attributes for this specific object
         //RequestAttributeValueUpdate(Som.UserOC);// Request update for all attribute values of all objects related to this object class
 
         // Request Update Values for specific attributes only
@@ -189,7 +189,9 @@ namespace Chat
         if (data.ObjectInstance.Handle == user.Handle)// Find the Object
         {
           simManager.Users.Remove(user);
-          ViewText = "User: " + user.NickName + " left. Number of Users Left: " + simManager.Users.Count + Environment.NewLine;
+          // for DateTime
+          ViewText = "Object removed. Reason: " + data.Tag.GetData<string>() + ". ";
+          ViewText += "User: " + user.NickName + " left. Number of Users Left: " + simManager.Users.Count + Environment.NewLine;
         }
       }
     }
@@ -212,9 +214,10 @@ namespace Chat
         //  if (item.Handle == Som.UserOC.NickName.Handle) UpdateName(simManager.Users[0]);
         //  else if (item.Handle == Som.UserOC.Status.Handle) UpdateStatus(simManager.Users[0]);
         //}
+
         // We can update all attributes if we dont want to check every attribute.
-        this.UpdateName(this.simManager.Users[0]);
-        this.UpdateStatus(this.simManager.Users[0]);
+        UpdateName(simManager.Users[0]);
+        UpdateStatus(simManager.Users[0]);
       }
     }
     // Reflect Object Attributes
@@ -243,7 +246,7 @@ namespace Chat
           //  if (item.Handle == Som.UserOC.NickName.Handle) user.NickName = item.GetValue<string>();
           //  else if (item.Handle == Som.UserOC.Status.Handle) user.Status = (StatusTypes)item.GetValue<uint>();
           //}
-          ViewText = "NickName: " + user.NickName + ". Status: " + user.Status + Environment.NewLine;
+          ViewText = "NickName: " + user.NickName + ". Status: " + user.Status + ". Update reason: " + data.Tag.GetData<string>() + Environment.NewLine;
         }
       }
     }
@@ -273,6 +276,7 @@ namespace Chat
         if (data.IsValueUpdated(Som.ChatIC.TimeStamp))
           ts = data.GetParameterValue<DateTime>(Som.ChatIC.TimeStamp);
 
+
         // 2nd method
         //foreach (var item in data.Interaction.Parameters)
         //{
@@ -281,7 +285,7 @@ namespace Chat
         //else if (Som.ChatIC.TimeStamp.Handle == item.Handle) ts = item.GetValue<DateTime>(); // must match with AddValue() type
         //}
 
-        ViewText = sentBy + "> " + msg + " (" + ts + ")" + Environment.NewLine;
+        ViewText = sentBy + "> " + msg + " (" + ts + ")" + ". Send Reason: " + data.Tag.GetData<string>() + Environment.NewLine;
       }
     }
     #endregion //Object Management Callbacks
