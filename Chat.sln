@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatFd", "ChatFd\ChatFd.csproj", "{96CA38E5-E606-4096-9F9F-53B5C7131BB6}"
 EndProject
@@ -15,8 +15,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{96CA38E5-E606-4096-9F9F-53B5C7131BB6}.Debug|x86.ActiveCfg = Release|x86
 		{96CA38E5-E606-4096-9F9F-53B5C7131BB6}.Debug|x86.Build.0 = Release|x86
-		{96CA38E5-E606-4096-9F9F-53B5C7131BB6}.Release|x86.ActiveCfg = Release|x86
-		{96CA38E5-E606-4096-9F9F-53B5C7131BB6}.Release|x86.Build.0 = Release|x86
+		{96CA38E5-E606-4096-9F9F-53B5C7131BB6}.Release|x86.ActiveCfg = Release|x64
+		{96CA38E5-E606-4096-9F9F-53B5C7131BB6}.Release|x86.Build.0 = Release|x64
 		{C0D329C1-B0ED-4799-8045-7D32C16D22DC}.Debug|x86.ActiveCfg = Debug|x86
 		{C0D329C1-B0ED-4799-8045-7D32C16D22DC}.Debug|x86.Build.0 = Debug|x86
 		{C0D329C1-B0ED-4799-8045-7D32C16D22DC}.Release|x86.ActiveCfg = Release|x86
@@ -24,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED860EA2-2D68-4A7E-987F-12471F7A459A}
 	EndGlobalSection
 EndGlobal
