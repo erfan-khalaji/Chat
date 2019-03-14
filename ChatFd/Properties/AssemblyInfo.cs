@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Okan Topcu")]
 [assembly: AssemblyProduct("ChatFd - Racon Example Application")]
-[assembly: AssemblyCopyright("Copyright © Okan Topcu 2010 - 2016")]
+[assembly: AssemblyCopyright("Copyright © Okan Topcu 2010 - 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.2.0")]
-[assembly: AssemblyFileVersion("0.0.2.0")]
+[assembly: AssemblyVersion("0.0.2.4")]
+[assembly: AssemblyFileVersion("0.0.2.4")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
